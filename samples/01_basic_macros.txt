@@ -1,0 +1,12 @@
+MACRO ADD_NUMS &a &b
+    LOAD &a
+    ADD &b
+    STORE &a
+MEND
+
+MACRO DISPLAY &x
+    PRINT &x
+MEND
+
+CALL ADD_NUMS 10 20
+CALL DISPLAY 10

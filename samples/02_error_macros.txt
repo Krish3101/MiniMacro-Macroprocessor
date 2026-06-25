@@ -1,0 +1,19 @@
+MACRO BAD_PARAM &a a
+    PRINT &a
+MEND
+
+MACRO DUP_PARAM &x &x
+    LOAD &x
+MEND
+
+MACRO NESTED &val
+    MACRO INNER &x
+        ADD &x
+    MEND
+    PRINT &val
+MEND
+
+MACRO NO_MEND &z
+    LOAD &z
+
+CALL UNKNOWN 10

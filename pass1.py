@@ -61,15 +61,22 @@ def pass1(lines):
                 i = _skip_to_mend(lines, i)
                 continue
 
+            has_param_error = False
+
             # Error: Duplicate formal parameters
             if len(set(params)) != len(params):
                 errors.append(f"ERROR: Line {i+1} - Duplicate parameters in macro '{macro_name}'")
+                has_param_error = True
 
             # Error: Params not prefixed with &
             for p in params:
                 if not p.startswith("&"):
                     errors.append(f"ERROR: Line {i+1} - Parameter '{p}' must start with '&'")
+                    has_param_error = True
 
+            if has_param_error:
+                i = _skip_to_mend(lines, i)
+                continue
             # Record in MNT
             MNT.append({"name": macro_name, "mdt_index": len(MDT), "params": params})
             defined_names.add(macro_name)
